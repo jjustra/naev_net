@@ -37,6 +37,17 @@ How to forth (tldr) :
 
 Also see : [Todo 2](#other-approach-to-server-execution-)
 
+### Word list
+* add - adds two numbers
+* sub - substarcts two numbers
+* mul - multiply two numbers
+* div - divide two numbers
+* mod - modulo of two numbers
+* prt - print item on top of stack to output
+* motd - prints Message Of The Day
+* autoreg - generates access key and make file for it
+* getkey - generate random key of given length
+
 ## Todo
 Some ideas on how to progress. 
 
