@@ -3,6 +3,7 @@
 
 /*
  * Interpreter
+ * simplified - no user functions
  * based on forth language
  */
 
@@ -10,12 +11,14 @@
 $_d=array();/* Data stack */
 $_s='';     /* Input string */
 $_i=0;      /* Current index in input string */
-$_w='';     /* Current word is stored here */
+$_w='';     /* Current word we interpret */
 $_q='';     /* Quote status of current word */
 
 
 /**
  * @brief Checks if character is white space
+ * @param $c Character to check
+ * @return True|False
  */
 function iswhite($c)
 {
@@ -27,7 +30,10 @@ function iswhite($c)
 }
 
 /**
- * @brief Reads word (or quoted string) from input; can do escapes also
+ * @brief Reads word (or quoted string) from input
+ *  sets globals accordingly
+ *  can do escapes too
+ * @return word strlen (+1 if quoted)
  */
 function readw()
 {
@@ -112,7 +118,7 @@ function genKey($len){
 }
 
 /**
- * @brief Generate key and file for it
+ * @brief Generate key and make file for it
  * @return key
  */
 function genKeyFile(){
@@ -191,7 +197,7 @@ if (!empty($_GET['d'])) {
    /* Decode incomming data */
    $_s=base64_decode(str_replace(array('+','/'),array('-','_'),$_GET['d']));
 
-   /* Loop untile there in input */
+   /* Loop untile there in input to read */
    while (readw()) {
 
       /* Quoted string - add on stack */
