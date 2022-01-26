@@ -3,6 +3,7 @@
 
 /*
  * Interpreter
+ * postfix syntax, stack-based
  * simplified - no user functions
  * based on forth language
  */
@@ -150,7 +151,7 @@ function E($s)
 function fc_add()
 {
    global $_d;
-   if (count($_d)<2) return 0;
+   if (count($_d)<2) return E('add : stack too short');
    $b=array_pop($_d);
    $a=array_pop($_d);
    $_d[]=$a+$b;
@@ -161,7 +162,7 @@ function fc_add()
 function fc_prt()
 {
    global $_d;
-   if (count($_d)<1) return 0;
+   if (count($_d)<1) return E('ptr : stack too short');
    $a=array_pop($_d);
    echo $a;
    return 1;
@@ -177,6 +178,15 @@ function fc_autoreg()
 {
    global $_d;
    $_d[]=genKeyFile();
+   return 1;
+}
+// ( n - s )
+function fc_genkey()
+{
+   global $_d;
+   if (count($_d)<1) return E('genkey : stack too short');
+   $a=array_pop($_d);
+   $_d[]=genKey($a);
    return 1;
 }
 
