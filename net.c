@@ -11,10 +11,13 @@
  * Configuration
  */
 
+/* Network */
 #define HOST "localhost"
 #define PORT 8080
-#define URI "/naev.php"
-#define BUF_SZ 1024*1024 /* Send/recv buffer size */
+#define URI "/naev_net/server.php"
+
+/* Send/recv buffer size in bytes */
+#define BUF_SZ 1024*1024
 
 
 IPaddress ip;
