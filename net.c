@@ -107,6 +107,7 @@ int net_get(char *data)
       /* If found - process, else error */
       if (p != NULL) {
          // HERE LUA SHOULD BE PLUGGED
+         printf( "send : %s\n", data );
          printf( "recv : %s\n", p+4 );
       } else
          ret = -1;
