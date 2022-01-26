@@ -10,7 +10,7 @@
  * Configuration
  */
 
-#define LOCALDEV
+//#define LOCALDEV
 
 /* Network */
 #ifdef LOCALDEV
@@ -87,14 +87,15 @@ int net_get(char *data)
    char *p;
    TCPsocket sock;
 
-   /* Begin construction of HTTP 1.1 request */
+   /* Begin construction of HTTP 1.0 request */
+   /* We use 1.0 to avoid 'chunked' responses of 1.1 */
    p = buf + sprintf( buf, "GET %s?d=", URI );
 
    /* Encode data to base64 and append */
    p = net_b64e( data, p );
 
    /* Finally add rest of request header */
-   sprintf( p, " HTTP/1.1\r\nHost: %s\r\n\r\n", HOST );
+   sprintf( p, " HTTP/1.0\r\nHost: %s\r\nConnection: close\r\n\r\n", HOST );
 
    /* Get length of our request */
    sz=strlen( buf );
@@ -114,9 +115,9 @@ int net_get(char *data)
       /* Receive response as long as there are some data */
       ret = 0;
       do {
-         sz = SDLNet_TCP_Recv( sock, buf+ret, BUF_SZ );
+         sz = SDLNet_TCP_Recv( sock, buf+ret, BUF_SZ-ret );
          ret += sz;
-      } while (sz > 0);
+      } while ( sz > 0 && ret < BUF_SZ );
       buf[ret] = 0;
 
    }
