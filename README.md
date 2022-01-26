@@ -24,16 +24,18 @@ File main.c contains basic example.
 ## Server
 Currently there is simplified [forth](https://en.wikipedia.org/wiki/Forth_(programming_language)) system interpreter on server side.
 
-tldr :
-* you send `1 1 add prt`
+How to forth (tldr) :
+* you send `1 2 add prt`
 * `1` is number - put it on stack
-* next `1` is also number - on stack it goes
+* `2` is also number - on stack it goes
 * `add` is function - call it
-  - it will take two items from top of stack
+  - it will take two items from top of stack (first `2`, then `1`)
   - adds them
   - puts result on top of stack
 * `prt` is also function call it
-  - it will print first thing from top of stack (`2` in this case)
+  - it will print first thing from top of stack (`3` in this case)
+
+Also see : [Todo 2](#other-approach-to-server-execution-)
 
 ## Todo
 Some ideas on how to progress. 
@@ -46,6 +48,8 @@ Automatic pilot registration. Gets access token to user.
 * Save returned key and use it from now on
 
 ### Other approach to server execution ?
-Is interpreter on server good way to go?
-It offers flexibility.
-But I may just overthinked it.
+Is interpreter a good way to go?
+
+It is small and offers flexibility.
+
+But I may just overthought it.
