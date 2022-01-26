@@ -22,7 +22,18 @@ File main.c contains basic example.
 * It's HTTP not HTTPS
 
 ## Server
-Currently there is [forth](https://en.wikipedia.org/wiki/Forth_(programming_language)) system interpreter on server side.
+Currently there is simplified [forth](https://en.wikipedia.org/wiki/Forth_(programming_language)) system interpreter on server side.
+
+tldr :
+* you send `1 1 add prt`
+* `1` is number - put it on stack
+* next `1` is also number - on stack it goes
+* `add` is function - call it
+  - it will take two items from top of stack
+  - adds them
+  - puts result on top of stack
+* `prt` is also function call it
+  - it will print first thing from top of stack (`2` in this case)
 
 ## Todo
 Some ideas on how to progress. 
