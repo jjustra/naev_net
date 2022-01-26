@@ -108,10 +108,11 @@ function readw()
  * @return key
  */
 function genKey($len){
+   $KEY_CL='-qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890_';
 	$n=0;$s='';
 	while ($len>0) {
 		if (!$n) $n=mt_rand();
-		$s.='-qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890_'[$n%64];
+		$s.=$KEY_CL[$n%64];
 		$n=$n>>6;
 		$len--;
 	}
@@ -155,6 +156,46 @@ function fc_add()
    $b=array_pop($_d);
    $a=array_pop($_d);
    $_d[]=$a+$b;
+   return 1;
+}
+// ( n n - n )
+function fc_sub()
+{
+   global $_d;
+   if (count($_d)<2) return E('add : stack too short');
+   $b=array_pop($_d);
+   $a=array_pop($_d);
+   $_d[]=$a-$b;
+   return 1;
+}
+// ( n n - n )
+function fc_mul()
+{
+   global $_d;
+   if (count($_d)<2) return E('add : stack too short');
+   $b=array_pop($_d);
+   $a=array_pop($_d);
+   $_d[]=$a*$b;
+   return 1;
+}
+// ( n n - n )
+function fc_div()
+{
+   global $_d;
+   if (count($_d)<2) return E('add : stack too short');
+   $b=array_pop($_d);
+   $a=array_pop($_d);
+   $_d[]=intval($a/$b);
+   return 1;
+}
+// ( n n - n )
+function fc_mod()
+{
+   global $_d;
+   if (count($_d)<2) return E('add : stack too short');
+   $b=array_pop($_d);
+   $a=array_pop($_d);
+   $_d[]=$a%$b;
    return 1;
 }
 
