@@ -21,6 +21,9 @@ File main.c contains basic example.
 * It's slow (network-wise), so no real-time
 * It's HTTP not HTTPS
 
+## Server
+Currently there is [forth](https://en.wikipedia.org/wiki/Forth_(programming_language)) system interpreter on server side.
+
 ## Todo
 Some ideas on how to progress. 
 
