@@ -1,7 +1,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <SDL2/SDL_net.h>
-#include <openssl/ssl.h>
 #include <stdio.h>
 
 #include "net.h"
