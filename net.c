@@ -10,10 +10,18 @@
  * Configuration
  */
 
+#define LOCALDEV
+
 /* Network */
-#define HOST "localhost"
-#define PORT 8080
-#define URI "/naev_net/server.php"
+#ifdef LOCALDEV
+   #define HOST "localhost"
+   #define PORT 8080
+   #define URI "/naev_net/server.php"
+#else
+   #define HOST "naev.kajutastudio.cz"
+   #define PORT 80
+   #define URI "/server.php"
+#endif
 
 /* Send/recv buffer size in bytes */
 #define BUF_SZ 1024*1024
@@ -21,7 +29,14 @@
 
 IPaddress ip;
 char buf[BUF_SZ];
-char b64_cl[]="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_"; /* Character list for url-safe base64 encoding */
+
+/*
+ * Character list for url-safe base64 encoding
+ * when 8bits are turned into 6bits, we can use
+ * 64 character alphabet to express original data
+ * url-safeness comes from '-_' vs '+/' at the end
+ */
+char b64_cl[]="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_";
 
 
 /**
@@ -29,11 +44,15 @@ char b64_cl[]="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_"
  *    @param s_in  Pointer to input buffer.
  *    @param s_out Pointer to output buffer.
  * @return Pointer to end of output buffer
- * @usage b64e("ABC",buf);
+ * @usage net_b64e("ABC",buf);
  */
-char *b64e(char *s_in, char *s_out){
+char *net_b64e(char *s_in, char *s_out){
    int i=0;
+
+   /* End on input now */
    if (s_in[i]==0) return s_out;
+
+   /* End on input in 1 or 2 chars */
    if (s_in[i+1]==0 || s_in[i+2]==0) {
       *s_out++= b64_cl[ s_in[i] >> 2 ];
       if (s_in[i+1]==0) {
@@ -45,11 +64,15 @@ char *b64e(char *s_in, char *s_out){
       }
       return s_out;
    }
+
+   /* Encode 3 input chars (8 bits) into 4 b64 output chars (6 bits) */
    *s_out++ = b64_cl[    s_in[i] >> 2 ];
    *s_out++ = b64_cl[ ( (s_in[i]   & 0b000011 ) << 4 ) + ( (s_in[i+1] >> 4) & 0b001111 ) ];
    *s_out++ = b64_cl[ ( (s_in[i+1] & 0b001111 ) << 2 ) + ( (s_in[i+2] >> 6) & 0b000011 ) ];
    *s_out++ = b64_cl[ (  s_in[i+2] & 0b111111 ) ];
-   return b64e( s_in+3, s_out );
+
+   /* Recursion */
+   return net_b64e( s_in+3, s_out );
 }
 
 /**
@@ -68,7 +91,7 @@ int net_get(char *data)
    p = buf + sprintf( buf, "GET %s?d=", URI );
 
    /* Encode data to base64 and append */
-   p = b64e( data, p );
+   p = net_b64e( data, p );
 
    /* Finally add rest of request header */
    sprintf( p, " HTTP/1.1\r\nHost: %s\r\n\r\n", HOST );
