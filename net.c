@@ -118,7 +118,7 @@ int net_get(char *data)
          sz = SDLNet_TCP_Recv( sock, buf+ret, BUF_SZ-ret );
          ret += sz;
       } while ( sz > 0 && ret < BUF_SZ );
-      buf[ret] = 0;
+      buf[ ret<BUF_SZ ? ret : (BUF_SZ-1) ] = 0;
 
    }
 
