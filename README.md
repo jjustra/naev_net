@@ -22,8 +22,8 @@ File main.c contains basic example.
 Some ideas on how to progress. 
 
 ### Autoreg
-Automatic installation registration. Gets access token to user.
+Automatic pilot registration. Gets access token to user.
 * Game starts (or is loaded)
 * Check if save contains access key
-* If not send 'autoreg' command to server
+* If not, send 'autoreg' command to server
 * Save returned key and use it from now on
