@@ -9,7 +9,7 @@ int main(int ac,char **av){
    printf("net_init : %d\n\n",net_init());
 
    printf("net_get : %d\n\n",net_get("'halo there\nhowdy' prt"));
-   printf("net_get : %d\n\n",net_get("1 1 add prt"));
+   printf("net_get : %d\n\n",net_get("1 2 add prt"));
    printf("net_get : %d\n\n",net_get("32 genkey prt"));
 
    net_quit();
