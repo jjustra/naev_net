@@ -2,6 +2,7 @@
 Simple library for HTTP-based networking, made for Naev game.
 
 Configuration is at beginning of net.c file.
+
 File main.c contains basic example.
 
 ### Basic idea is like this :
