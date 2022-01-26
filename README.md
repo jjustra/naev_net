@@ -31,7 +31,7 @@ How to forth (tldr) :
 * `add` is function - call it
   - it will take two items from top of stack (first `2`, then `1`)
   - adds them
-  - puts result on top of stack
+  - puts result (`3`) on top of stack
 * `prt` is also function call it
   - it will print first thing from top of stack (`3` in this case)
 
