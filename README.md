@@ -14,7 +14,9 @@ File main.c contains basic example.
 
 ### What this can be used for :
 * Postal service
+* Guilds
 * Guild vaults
+* Online features in general
 * etc.
 
 ### Possible limitations :
