@@ -18,8 +18,9 @@ File main.c contains basic example.
 * etc.
 
 ### Possible limitations :
-* It's slow (network-wise), so no real-time
-* It's HTTP not HTTPS
+* It's slow (protocol/hosting-wise), so no real-time
+* It's HTTP not HTTPS - maybe not an issue
+* ASCII only for now ? - pressumed, not checked
 
 ## Server
 Currently there is simplified [forth](https://en.wikipedia.org/wiki/Forth_(programming_language)) system interpreter on server side.
