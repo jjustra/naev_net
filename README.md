@@ -25,7 +25,7 @@ File main.c contains basic example.
 Currently there is simplified [forth](https://en.wikipedia.org/wiki/Forth_(programming_language)) system interpreter on server side.
 
 How to forth (tldr) :
-* you send `1 2 add prt`
+* you send `1 2 add prt`, server reads it word by word
 * `1` is number - put it on stack
 * `2` is also number - on stack it goes
 * `add` is function - call it
