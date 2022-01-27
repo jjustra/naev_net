@@ -76,6 +76,36 @@ char *net_b64e(char *s_in, char *s_out){
 }
 
 /**
+ * @brief Escapes and quote string. For text sanitization.
+ *    @param buf Pointer to output buffer.
+ *    @param s   String to escape and quote.
+ * @return Number of written bytes
+ * @usage net_sprintq(buf,"user inputed text for example");
+ */
+int net_sprintq(char *buf,char *s)
+{
+   char *_buf=buf;
+
+   *buf++ = '"';
+   while (*s) {
+      if (*s=='\\' || *s=='"')
+         *buf++ = '\\';
+      *buf++ = *s;
+      s++;
+   }
+   *buf++ = '"';
+
+   return buf-_buf;
+}
+
+
+
+/*
+ * Main interface implementation
+ */
+
+
+/**
  * @brief Send request to HOST server and puts response string into Lua.
  *    @param data String to be send to server.
  * @return -1 on error, else number of received bytes

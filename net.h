@@ -3,7 +3,7 @@
  */
 
 char *net_b64e(char *s_in, char *s_out);
-
+int net_sprintq(char *buf,char *s);
 
 /*
  * Main interface
